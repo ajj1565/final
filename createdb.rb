@@ -9,17 +9,28 @@ DB.create_table! :bars do
   primary_key :id
   String :name
   String :description, text: true
+<<<<<<< HEAD
   String :item1, text: true
   String :item2, text: true
   String :item3, text: true
   String :item4, text: true
   String :location, text: true
+=======
+  String :item1
+  String :item2
+  String :item3
+  String :item4
+  String :location
+>>>>>>> d681e152182cb79c188a0bcf5b4886cf531c24ea
 end
 DB.create_table! :ratings do
   primary_key :id
   foreign_key :bar_id
   foreign_key :user_id
+<<<<<<< HEAD
   Boolean :rated
+=======
+>>>>>>> d681e152182cb79c188a0bcf5b4886cf531c24ea
   Float :staff
   Float :environment
   Float :drinks
