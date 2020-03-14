@@ -6,8 +6,9 @@ require "logger"                                                                
 require "twilio-ruby"                                                                 #
 require "bcrypt"                                                                      #
 require "geocoder"
-account_sid = AC0c9a0670fb6c0165b8f10fdd1797a49f
-auth_token = d29cd2956ee05d29cbd72136a70e8ebe
+# put your API credentials here (found on your Twilio dashboard)
+account_sid = ENV["TWILIO_ACCOUNT_SID"]
+auth_token = ENV["TWILIO_AUTH_TOKEN"]
 client = Twilio::REST::Client.new(account_sid, auth_token)
 connection_string = ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/development.sqlite3"  #
 DB ||= Sequel.connect(connection_string)                                              #
@@ -18,11 +19,41 @@ before { puts; puts "--------------- NEW REQUEST ---------------"; puts }       
 after { puts; }                                                                       #
 #######################################################################################
 
-client.messages.create(
-  from: "+17724105382", 
-  to: "+16084383038",
-  body: "Hey KIEI 451!"
-)
+bars_table = DB.from(:bars)
+ratings_table = DB.from(:ratings)
+users_table = DB.from(:users)
 
-events_table = DB.from(:events)
-rsvps_table = DB.from(:rsvps)
+before do
+    @current_user = users_table.where(id: session["user_id"]).to_a[0]
+end
+
+get "/" do
+    @bars = bars_table.all.to_a
+    view "homepage"
+end
+
+get "/bars/:id" do
+    @bar = bars_table.where(id: params[:id]).to_a[0]
+    @ratings = ratings_table.where(bar_id: @bar[:id])
+    @users_table = users_table
+
+    ratingscount = ratings_table.where(bar_id: @bar[:id]).count
+    if ratingscount == 0 then
+        @staffrating = 0
+        @environmentrating = 0
+        @drinksrating = 0
+        @overallrating = 0
+    else
+        staffrating = ratings_table.where(bar_id: @bar[:id]).sum(:staff)
+        environmentrating = ratings_table.where(bar_id: @bar[:id]).sum(:environment)
+        drinksrating = ratings_table.where(bar_id: @bar[:id]).sum(:drinks)
+        overallrating=staffrating+environmentrating+drinksrating
+        @staffrating = staffrating / (ratingscount/3)
+        @environmentrating = environmentrating / (ratingscount/3)
+        @drinksrating = drinksrating / (ratingscount/3)
+        @overallrating = overallrating / ratingscount
+    end
+    view "bar"
+
+    
+end

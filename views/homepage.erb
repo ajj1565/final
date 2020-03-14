@@ -1,0 +1,5 @@
+<h1>My Favorite Bars</h1>
+
+<% for bar in @bars %>
+    <p><a href="/bars/<%= bar[:id] %>"><%= bar[:name] %></a></p>
+<% end %>

@@ -1,0 +1,129 @@
+<div class="row">
+    <div class="col-sm-9">
+        <h1><%= @bar[:name] %></h1>
+        <p><%= @bar[:description] %></p>
+        <ul>
+            <li><%= @bar[:item1]%></li>
+            <li><%= @bar[:item2]%></li>
+            <li><%= @bar[:item3]%></li>
+            <li><%= @bar[:item4]%></li>
+        </ul>
+        <h3>Rating</h3>
+        <h3>
+            <% if @overallrating >= 4.75 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <% elsif @overallrating >= 4.25 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half"></i>
+            <% elsif @overallrating >= 3.75 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+            <% elsif @overallrating >= 3.25 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half"></i><i class="far fa-star"></i>
+            <% elsif @overallrating >= 2.75 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% elsif @overallrating >= 2.25 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% elsif @overallrating >= 1.75 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% elsif @overallrating >= 1.25 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star-half"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% elsif @overallrating >= 0.75 then %>
+                <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% elsif @overallrating >= 0.25 then %>
+                <i class="fas fa-star-half"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% else %>
+                <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% end %>
+        </h3>
+        <p>-----------------------</p>
+        <p>Staff
+            <% if @staffrating >= 4.75 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <% elsif @staffrating >= 4.25 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half"></i>
+            <% elsif @staffrating >= 3.75 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+            <% elsif @staffrating >= 3.25 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half"></i><i class="far fa-star"></i>
+            <% elsif @staffrating >= 2.75 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% elsif @staffrating >= 2.25 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% elsif @staffrating >= 1.75 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% elsif @staffrating >= 1.25 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star-half"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% elsif @staffrating >= 0.75 then %>
+                <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% elsif @staffrating >= 0.25 then %>
+                <i class="fas fa-star-half"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% else %>
+                <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% end %>
+        </p>
+        <p>Environment
+            <% if @environmentrating >= 4.75 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <% elsif @environmentrating >= 4.25 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half"></i>
+            <% elsif @environmentrating >= 3.75 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+            <% elsif @environmentrating >= 3.25 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half"></i><i class="far fa-star"></i>
+            <% elsif @environmentrating >= 2.75 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% elsif @environmentrating >= 2.25 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% elsif @environmentrating >= 1.75 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% elsif @environmentrating >= 1.25 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star-half"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% elsif @environmentrating >= 0.75 then %>
+                <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% elsif @environmentrating >= 0.25 then %>
+                <i class="fas fa-star-half"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% else %>
+                <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% end %>
+        </p>
+        <p>Drinks
+            <% if @drinksrating >= 4.75 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <% elsif @drinksrating >= 4.25 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half"></i>
+            <% elsif @drinksrating >= 3.75 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+            <% elsif @drinksrating >= 3.25 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half"></i><i class="far fa-star"></i>
+            <% elsif @drinksrating >= 2.75 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% elsif @drinksrating >= 2.25 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% elsif @drinksrating >= 1.75 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% elsif @drinksrating >= 1.25 then %>
+                <i class="fas fa-star"></i><i class="fas fa-star-half"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% elsif @drinksrating >= 0.75 then %>
+                <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% elsif @drinksrating >= 0.25 then %>
+                <i class="fas fa-star-half"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% else %>
+                <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+            <% end %>
+        </p>
+        <% for comment in @ratings %>
+            <div class="media">
+                <div class="media-body">
+                    <h5 class="mt-0"><%= @users_table.where(id: ratings[:user_id]).to_a[0][:username] %></h5>
+                    <%= comment[:comments] %>
+                </div>
+            </div>
+        <% end %>
+        <p class="mt-5">
+            <% if @current_user %>
+                <a href="/bar/<%= @bar[:id] %>/ratings/new" class="btn btn-primary">RSVP now!</a>
+            <% else %>
+                <a href="/logins/new" class="btn btn-danger">Please sign in to comment and rate</a>
+            <% end %>
+        </p>
+    </div>
+</div>

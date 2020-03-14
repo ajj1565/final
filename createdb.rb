@@ -5,31 +5,72 @@ DB = Sequel.connect(connection_string)                                          
 #######################################################################################
 
 # Database schema - this should reflect your domain model
-DB.create_table! :events do
+DB.create_table! :bars do
   primary_key :id
-  String :title
-  String :description, text: true
-  String :date
-  String :location
-end
-DB.create_table! :rsvps do
-  primary_key :id
-  foreign_key :event_id
-  Boolean :going
   String :name
-  String :email
+  String :description, text: true
+  String :item1, text: true
+  String :item2, text: true
+  String :item3, text: true
+  String :item4, text: true
+  String :location, text: true
+end
+DB.create_table! :ratings do
+  primary_key :id
+  foreign_key :bar_id
+  foreign_key :user_id
+  Boolean :rated
+  Float :staff
+  Float :environment
+  Float :drinks
   String :comments, text: true
+end
+DB.create_table! :users do
+  primary_key :id
+  String :username
+  String :name
+  String :phone
+  String :email
+  String :password
 end
 
 # Insert initial (seed) data
-events_table = DB.from(:events)
+bars_table = DB.from(:bars)
 
-events_table.insert(title: "Bacon Burger Taco Fest", 
-                    description: "Here we go again bacon burger taco fans, another Bacon Burger Taco Fest is here!",
-                    date: "June 21",
-                    location: "Kellogg Global Hub")
+bars_table.insert(name: "Sidetrack",
+                    description: "Behomoth gay club drawing a diverse crowd, serving up slushy drinks & known for showtune nights",
+                    item1: "8 separate bars to get drinks from",
+                    item2: "Large outdoor rooftop patio to enjoy slushy drinks on warm summer days",
+                    item3: "Showtunes night 3 times a week",
+                    item4: "Weekly drag events like Beyonce Night, or Pop Rocks",
+                    location: "3349 N Halsted St, Chicago, IL 60657")
 
-events_table.insert(title: "Kaleapolooza", 
-                    description: "If you're into nutrition and vitamins and stuff, this is the event for you.",
-                    date: "July 4",
-                    location: "Nowhere")
+bars_table.insert(name: "Roscoe's Tavern",
+                    description: "Chicago's premiere gay bar",
+                    item1: "Dance floor with a live DJ on weekends",
+                    item2: "Exclusive drag shows with queens from RuPaul's Drag Race",
+                    item3: "Late night food menu",
+                    item4: "$1 Beers for Sunday Funday drinking",
+                    location: "3356 N Halsted St, Chicago, IL 60657")
+bars_table.insert(name: "Scarlet Bar",
+                    description: "Boystown's dance club with drink specials",
+                    item1: "Dance floor with a live DJ",
+                    item2: "Liquid brunch on Sundays",
+                    item3: "Weekly frat night on Thirsty Thursdays",
+                    item4: "Bottle service available",
+                    location: "3320 N Halsted St, Chicago, IL 60657")
+bars_table.insert(name: "North End",
+                    description: "Longtime, low-key gay sports bar with flat-screen TVs, darts, billiards & occasional karaoke",
+                    item1: "Halsted's only gay sports bar",
+                    item2: "Pool table and darts to play",
+                    item3: "Weekly events including Get Smashed with Bonnie",
+                    item4: "Large beers available to quench your thirst",
+                    location: "3733 N Halsted St, Chicago, IL 60613")
+bars_table.insert(name: "Charlie's",
+                    description: "Western-themed Boystown bar & dance club with drag shows, karaoke, bingo & late-night hours",
+                    item1: "Late night dancing - open til 4am or later every night",
+                    item2: "Drag shows throughout the week",
+                    item3: "Line dancing night on Saturdays",
+                    item4: "No cover til after midnight",
+                    location: "3726 North Broadway, Chicago, IL 60613")
+                    
