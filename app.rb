@@ -6,8 +6,9 @@ require "logger"                                                                
 require "twilio-ruby"                                                                 #
 require "bcrypt"                                                                      #
 require "geocoder"
-account_sid = AC0c9a0670fb6c0165b8f10fdd1797a49f
-auth_token = d29cd2956ee05d29cbd72136a70e8ebe
+# put your API credentials here (found on your Twilio dashboard)
+account_sid = ENV["TWILIO_ACCOUNT_SID"]
+auth_token = ENV["TWILIO_AUTH_TOKEN"]
 client = Twilio::REST::Client.new(account_sid, auth_token)
 connection_string = ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/development.sqlite3"  #
 DB ||= Sequel.connect(connection_string)                                              #
