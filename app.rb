@@ -37,6 +37,10 @@ get "/bars/:id" do
     @ratings = ratings_table.where(bar_id: @bar[:id])
     @users_table = users_table
 
+    results = Geocoder.search(@bar[:location])
+    lat_long = results.first.coordinates
+    @lat_long = "#{lat_long[0]} #{lat_long[1]}"
+
     ratingscount = ratings_table.where(bar_id: @bar[:id]).count
     if ratingscount == 0 then
         @staffrating = 0
@@ -54,6 +58,14 @@ get "/bars/:id" do
         @overallrating = overallrating / ratingscount
     end
     view "bar"
+end
 
-    
+get "/users/new" do
+    view "create_user"
+end
+
+get "/users/create" do
+    hashed_password = BCrypt::Password.create(params["password"])
+    users_table.insert(username: params["username"], name: params["name"], email: params["email"], password: hashed_password, phone: params["phone"])
+    view "homepage"
 end
