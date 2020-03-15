@@ -64,8 +64,28 @@ get "/users/new" do
     view "create_user"
 end
 
-get "/users/create" do
+post "/users/create" do
     hashed_password = BCrypt::Password.create(params["password"])
-    users_table.insert(username: params["username"], name: params["name"], email: params["email"], password: hashed_password, phone: params["phone"])
-    view "homepage"
+    users_table.insert(username: params["username"], 
+        name: params["name"],
+        phone: params["phone"],
+        email: params["email"], 
+        password: hashed_password
+        )
+    view "create_user_confirm"
+end
+
+get "/logins/new" do
+    view "login"
+end
+
+post "/logins/create" do
+    user = users_table.where(username: params["username"]).to_a[0]
+    if user && BCrypt::Password::new(user[:password]) == params["password"]
+        session["user_id"] = user[:id]
+        @current_user = user
+        view "login_confirm"
+    else
+        view "login_fail"
+    end
 end
