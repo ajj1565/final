@@ -96,9 +96,9 @@ get "/bars/:id/ratings/new" do
 end
 
 get "/bars/:id/ratings/create" do
-#    if ratings_table.where(bar_id: params["id"], user_id: session["user_id"]).count > 0 then
-#        view "create_rating_fail"
-#    else
+    if ratings_table.where(bar_id: params["id"], user_id: session["user_id"]).count > 0 then
+        view "create_rating_fail"
+    else
         ratings_table.insert(
             bar_id: params["id"],
             user_id: session["user_id"],
@@ -119,7 +119,7 @@ get "/bars/:id/ratings/create" do
             )
         end
         view "create_rating_confirm"
-#    end
+    end
 end
 
 get "/logout" do
