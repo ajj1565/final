@@ -8,6 +8,8 @@
             <li><%= @bar[:item3]%></li>
             <li><%= @bar[:item4]%></li>
         </ul>
+
+        <p>-----------------------</p>
         <h3>Rating</h3>
         <h3>
             <% if @overallrating >= 4.75 then %>
@@ -34,6 +36,7 @@
                 <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
             <% end %>
         </h3>
+
         <p>-----------------------</p>
         <p>Staff
             <% if @staffrating >= 4.75 then %>
@@ -110,14 +113,6 @@
                 <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
             <% end %>
         </p>
-        <% for comment in @ratings %>
-            <div class="media">
-                <div class="media-body">
-                    <h5 class="mt-0"><%= @users_table.where(id: ratings[:user_id]).to_a[0][:username] %></h5>
-                    <%= comment[:comments] %>
-                </div>
-            </div>
-        <% end %>
         <p class="mt-5">
             <% if @current_user %>
                 <a href="/bars/<%= @bar[:id] %>/ratings/new" class="btn btn-primary">Rate this bar</a>
@@ -125,14 +120,25 @@
                 <a href="/logins/new" class="btn btn-danger">Please sign in to comment and rate</a>
             <% end %>
         </p>
+
     </div>
     <div class="col-sm-6">
         <iframe
-        width="600"
-        height="450"
+        width="400"
+        height="300"
         frameborder="0" style="border:0"
         src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCtovsQvkIUWlNqtYwXY87gEd4ZSmJEhMw
           &q=<%= @lat_long %>&zoom=16" allowfullscreen>
-      </iframe>
+        </iframe>
+        <p>-----------------------</p>
+        <h3>Comments:</h3>
+        <% for comment in @ratings %>
+            <div class="media">
+                <div class="media-body">
+                    <h5 class="mt-0"><%= @users_table.where(id: comment[:user_id]).to_a[0][:username] %></h5>
+                    <%= comment[:comments] %>
+                </div>
+            </div>
+        <% end %>
     </div>
 </div>

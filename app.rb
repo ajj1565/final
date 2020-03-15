@@ -52,10 +52,10 @@ get "/bars/:id" do
         environmentrating = ratings_table.where(bar_id: @bar[:id]).sum(:environment)
         drinksrating = ratings_table.where(bar_id: @bar[:id]).sum(:drinks)
         overallrating=staffrating+environmentrating+drinksrating
-        @staffrating = staffrating / (ratingscount/3)
-        @environmentrating = environmentrating / (ratingscount/3)
-        @drinksrating = drinksrating / (ratingscount/3)
-        @overallrating = overallrating / ratingscount
+        @staffrating = staffrating / ratingscount
+        @environmentrating = environmentrating / ratingscount
+        @drinksrating = drinksrating / ratingscount
+        @overallrating = overallrating / (ratingscount*3)
     end
     view "bar"
 end
@@ -96,23 +96,22 @@ get "/bars/:id/ratings/new" do
 end
 
 get "/bars/:id/ratings/create" do
-    if ratings_table.where(:bar_id params["id"], :user_id session["user_id"]) then
-        view "create_rating_fail"
-    else
+#    if ratings_table.where(bar_id: params["id"], user_id: session["user_id"]).count > 0 then
+#        view "create_rating_fail"
+#    else
         ratings_table.insert(
             bar_id: params["id"],
             user_id: session["user_id"],
             staff: params["staff"],
             environment: params["environment"],
             drinks: params["drinks"],
+            comments: params["comments"],
             textuser: params["textuser"]
         )
         textusers = ratings_table.where(bar_id: params["id"], textuser: true)
-        bar = bars_table.where(bar_id: params["id"])
-        barname = bar[:name]
+        barname = bars_table.where(id: params["id"]).to_a[0][:name]
         for user in textusers
-            activeuser = users_table.where(user[:user_id])
-            phonenumber = activeuser[:phone]
+            phonenumber = users_table.where(id: user[:user_id]).to_a[0][:phone]
             client.messages.create(
                 from: "+17724105382", 
                 to: phonenumber,
@@ -120,5 +119,11 @@ get "/bars/:id/ratings/create" do
             )
         end
         view "create_rating_confirm"
-    end
+#    end
+end
+
+get "/logout" do
+    session["user_id"] = nil
+    @current_user = nil
+    view "logout"
 end

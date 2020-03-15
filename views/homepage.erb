@@ -1,5 +1,6 @@
 <h1>My Favorite Bars</h1>
-
-<% for bar in @bars %>
-    <p><a href="/bars/<%= bar[:id] %>"><%= bar[:name] %></a></p>
-<% end %>
+<div class="list-group">
+    <% for bar in @bars %>
+    <a href="/bars/<%= bar[:id] %>" class="list-group-item list-group-item-action"><%= bar[:name] %></a>
+    <% end %>
+</div>
