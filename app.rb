@@ -96,7 +96,7 @@ get "/bars/:id/ratings/new" do
 end
 
 get "/bars/:id/ratings/create" do
-    if ratings_table.where(bar_id: params["id"], user_id: session["user_id"]).count > 0 then
+    if ratings_table.where(bar_id: params["id"], user_id: session["user_id"]).to_a[0] then
         view "create_rating_fail"
     else
         ratings_table.insert(
