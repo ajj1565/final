@@ -18,7 +18,7 @@ use Rack::Session::Cookie, key: 'rack.session', path: '/', secret: 'secret'     
 before { puts; puts "--------------- NEW REQUEST ---------------"; puts }             #
 after { puts; }                                                                       #
 #######################################################################################
-
+#
 bars_table = DB.from(:bars)
 ratings_table = DB.from(:ratings)
 users_table = DB.from(:users)
