@@ -23,6 +23,7 @@ DB.create_table! :ratings do
   Float :environment
   Float :drinks
   String :comments, text: true
+  Boolean :textuser
 end
 DB.create_table! :users do
   primary_key :id

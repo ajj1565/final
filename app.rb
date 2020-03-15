@@ -89,3 +89,36 @@ post "/logins/create" do
         view "login_fail"
     end
 end
+
+get "/bars/:id/ratings/new" do
+    @bar = bars_table.where(id: params[:id]).to_a[0]
+    view "create_rating"
+end
+
+get "/bars/:id/ratings/create" do
+    if ratings_table.where(:bar_id params["id"], :user_id session["user_id"]) then
+        view "create_rating_fail"
+    else
+        ratings_table.insert(
+            bar_id: params["id"],
+            user_id: session["user_id"],
+            staff: params["staff"],
+            environment: params["environment"],
+            drinks: params["drinks"],
+            textuser: params["textuser"]
+        )
+        textusers = ratings_table.where(bar_id: params["id"], textuser: true)
+        bar = bars_table.where(bar_id: params["id"])
+        barname = bar[:name]
+        for user in textusers
+            activeuser = users_table.where(user[:user_id])
+            phonenumber = activeuser[:phone]
+            client.messages.create(
+                from: "+17724105382", 
+                to: phonenumber,
+                body: "Hey! a new review for #{barname} has just been posted!"
+            )
+        end
+        view "create_rating_confirm"
+    end
+end

@@ -120,7 +120,7 @@
         <% end %>
         <p class="mt-5">
             <% if @current_user %>
-                <a href="/bar/<%= @bar[:id] %>/ratings/new" class="btn btn-primary">RSVP now!</a>
+                <a href="/bars/<%= @bar[:id] %>/ratings/new" class="btn btn-primary">Rate this bar</a>
             <% else %>
                 <a href="/logins/new" class="btn btn-danger">Please sign in to comment and rate</a>
             <% end %>

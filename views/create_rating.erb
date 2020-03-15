@@ -1,0 +1,49 @@
+<h1>Rate <%= @bar[:name] %></h1>
+
+<form action="/bars/<%= @bar[:id] %>/ratings/create">
+    <div class="form-group">
+        <label>Rate the Staff</label>
+        <select class="form-control" name="staff">
+        <option>5</option>
+        <option>4</option>
+        <option>3</option>
+        <option>2</option>
+        <option>1</option>
+        <option>0</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Rate the Environment</label>
+        <select class="form-control" name="environment">
+        <option>5</option>
+        <option>4</option>
+        <option>3</option>
+        <option>2</option>
+        <option>1</option>
+        <option>0</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Rate the Drinks</label>
+        <select class="form-control" name="drinks">
+        <option>5</option>
+        <option>4</option>
+        <option>3</option>
+        <option>2</option>
+        <option>1</option>
+        <option>0</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Comments</label>
+        <textarea class="form-control" rows="3" name="comments"></textarea>
+    </div>
+    <div class="form-group">
+        <label>I would like to receive texts when new ratings are available</label>
+        <select class="form-control" name="textuser">
+            <optionvalue=1>"Yes"</option>
+            <optionvalue=0>"No"</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
